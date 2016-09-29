@@ -1,0 +1,133 @@
+set nocompatible
+if v:lang =~ "utf8$" || v:lang =~ "UTF-8$"
+  set fileencodings=utf-8,latin1
+endif
+
+" pathogen -------------------------------------------------
+filetype off
+call pathogen#infect()
+call pathogen#helptags()
+" ----------------------------------------------------------
+
+" gvim -----------------------------------------------------
+if &t_Co > 2 || has("gui_running")
+  syntax on
+  colorscheme peachpuff
+  set hlsearch
+endif
+if has("gui_running")
+  set lines=42
+  set columns=112
+  set guioptions-=l
+  set guioptions-=r
+  set guioptions-=L
+  set guioptions-=R
+  set guioptions-=T
+  set guioptions-=m
+endif
+if &term=="xterm"
+  set t_Co=8
+  set t_Sb=^[4%dm
+  set t_Sf=^[3%dm
+endif
+if has("autocmd")
+  autocmd BufReadPost *
+  \ if line("'\"") > 0 && line ("'\"") <= line("$") |
+  \   exe "normal g'\"" |
+  \ endif
+  autocmd GuiEnter * set vb t_vb=
+endif
+" ----------------------------------------------------------
+
+let g:loaded_matchparen=1
+
+" tab complete ---------------------------------------------
+function! InsertTabWrapper(direction)
+  let col = col('.') - 1
+  if !col || getline('.')[col - 1] !~ '\k'
+    return "\<tab>"
+  elseif "backward" == a:direction
+    return "\<c-p>"
+  else
+    return "\<c-n>"
+  endif
+endfunction
+
+inoremap <silent> <TAB>   <C-R>=InsertTabWrapper ("backward")<CR>
+inoremap <silent> <S-TAB> <C-R>=InsertTabWrapper ("forward")<CR>
+" ----------------------------------------------------------
+
+" maps -----------------------------------------------------
+map <F4> :set spell!<CR>
+map <F6> :NERDTreeToggle<CR>
+map <F7> :TagbarToggle<CR>
+map <F9> :nohl<CR>
+imap <F9> <C-O><F9>
+map ,b :Gblame<CR>
+" windows
+map <A-h> :wincmd h<CR>
+map <A-j> :wincmd j<CR>
+map <A-k> :wincmd k<CR>
+map <A-l> :wincmd l<CR>
+"  tabs
+map ,t <ESC>:tabnew<CR>
+map ,T <ESC>:tabnew<CR><F6><F7><C-w>w<C-p>
+map ,c <ESC>:tabclose<CR>
+nnoremap <A-S-F1> 1gt
+nnoremap <S-h> gT
+nnoremap <S-l> gt
+" lines
+inoremap <C-h> <C-o>h
+inoremap <C-j> <C-o>j
+inoremap <C-k> <C-o>k
+inoremap <C-l> <C-o>l
+"  vimrc editing
+map ,v <ESC>:tabnew<CR>:e ~/.vimrc<CR>
+map <silent> ,V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
+" ----------------------------------------------------------
+
+filetype plugin indent on
+
+" lilypond
+autocmd! BufRead,BufNewFile *.ly setfiletype lilypond
+
+" settings -------------------------------------------------
+set t_vb=
+set visualbell
+set t_vb=
+
+set autoindent
+set backspace=2
+set cmdheight=2
+set comments="s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,fb:-,;,!"
+set copyindent
+set expandtab
+set foldmethod=indent
+set foldignore=
+set guifont=Monospace\ 10
+set hlsearch
+set history=1024
+set incsearch
+set infercase
+set linebreak
+set mouse=a
+set mousehide
+set wrap
+set pastetoggle=<F8>
+set ruler
+set scrolloff=5
+set shiftround
+set shiftwidth=2
+set showcmd
+set showmatch
+set sidescroll=1
+set sidescrolloff=10
+set smartcase
+set smartindent
+set smarttab
+set spelllang=en_us
+set softtabstop=8
+"set statusline+=%{fugitive#statusline()} " http://pastebin.com/GuU1PHzR
+set tabstop=8
+set viminfo='20,\"1024
+" ----------------------------------------------------------

@@ -1,0 +1,8 @@
+*.o
+*.so
+*.a
+*.la
+*.pyc
+*.pyo
+.*.swp
+.*.swo

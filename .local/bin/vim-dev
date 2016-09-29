@@ -1,0 +1,3 @@
+#!/bin/sh
+
+vim -c ':NERDTreeToggle' -c ':TagbarToggle' -c ':wincmd l' -c ':CtrlP' ${@}

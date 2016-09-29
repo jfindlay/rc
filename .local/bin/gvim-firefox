@@ -1,0 +1,4 @@
+#!/bin/bash
+# custom editor settings for the It's All Text! firefox plugin
+
+gvim -c "set textwidth=0" -c "set guifont=monospace\ 10" -geometry 120x48 "${@}"
