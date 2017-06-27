@@ -1,7 +1,7 @@
 [color]
 	ui = true
 [user]
-	email = jfindlay@gmail.com
+	email = justin@findlay.space
 	name = Justin Findlay
 [core]
 	pager = less -F -X
