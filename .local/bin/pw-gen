@@ -4,7 +4,7 @@ import sys,re,string
 from subprocess import Popen,PIPE
 from argparse import ArgumentParser,ArgumentDefaultsHelpFormatter
 
-chr = unichr if sys.version_info[0] >= 3 else unichr
+chr = chr if sys.version_info[0] >= 3 else unichr
 
 def parse_args():
   desc = 'create a password from /dev/urandom'
