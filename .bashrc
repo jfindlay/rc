@@ -144,7 +144,6 @@ export F90CACHE_DIR=$HOME/.cache/f90cache
 export PKG_CONFIG_PATH=$HOME/.local/lib/pkgconfig
 export IPYTHONDIR=$HOME/.config/ipython
 export TIGRC_USER=$HOME/.config/tig
-export TZ='America/Denver'
 export LANG='en_US.UTF-8'
 export LANGUAGE='en_US:en'
 export LOCALE='en_US.UTF-8'
