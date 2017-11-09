@@ -117,7 +117,7 @@ set pastetoggle=<F8>
 set ruler
 set scrolloff=5
 set shiftround
-set shiftwidth=2
+set shiftwidth=4
 set showcmd
 set showmatch
 set sidescroll=1
