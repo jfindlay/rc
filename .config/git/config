@@ -3,5 +3,6 @@
 [user]
 	email = justin@findlay.space
 	name = Justin Findlay
+	signingkey = 423725EEF5A74B6F
 [core]
 	pager = less -F -X

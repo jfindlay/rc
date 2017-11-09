@@ -4,5 +4,4 @@
 *.la
 *.pyc
 *.pyo
-.*.swp
-.*.swo
+.*.sw?
