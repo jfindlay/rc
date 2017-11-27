@@ -6,3 +6,5 @@
 	signingkey = 423725EEF5A74B6F
 [core]
 	pager = less -F -X
+[gpg]
+	program = gpg2

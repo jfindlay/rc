@@ -137,6 +137,7 @@ export HISTFILESIZE=65536
 export HISTSIZE=4096
 export CFLAGS="-march=native -mtune=native -Os -fmessage-length=0 -pipe"
 export CXXFLAGS="$CFLAGS" # -fno-implicit-templates"
+export GPG_TTY=$(tty)  # Workaround for GPG 2.1 pinentry bug
 export GIT_SSH=$HOME/.local/bin/git-ssh
 export SCREENRC=$HOME/.local/share/pscreen/profiles/base
 export CCACHE_DIR=$HOME/.cache/ccache
