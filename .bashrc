@@ -129,7 +129,7 @@ fi
 # ------------------------------------------------------------------------------
 
 # exports ----------------------------------------------------------------------
-[[ $PATH =~ "/usr/lib/ccache/bin" ]] || export PATH=/usr/lib/ccache/bin:$PATH
+[[ $(which ccache &> /dev/null) == 0 ]] && ( [[ $PATH =~ "/usr/lib/ccache/bin" ]] || export PATH=/usr/lib/ccache/bin:$PATH )
 [[ $PATH =~ "${HOME}/.local/bin" ]] || export PATH=$HOME/.local/bin:$PATH
 [[ $PYHTHONPATH =~ "${HOME}/.local/lib/python" ]] || export PYTHONPATH=$HOME/.local/lib64/python:$HOME/.local/lib/python:$PYTHONPATH
 export EDITOR="vim"
