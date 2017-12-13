@@ -34,7 +34,7 @@ test_color()
     type -P dircolors &> /dev/null
     dir_colors=$(dircolors --print-database)
   fi
-  [[ $'\n'${dir_colors} == *$'\n'"TERM "${safe_term}* ]] && use_color=true
+  [[ ${dir_colors} == *"TERM ${safe_term}"* ]] && use_color=true
 }
 
 set_color()
@@ -111,23 +111,6 @@ set_ps1()
   fi
 }
 
-# aliases ----------------------------------------------------------------------
-alias which='alias | /usr/bin/which --tty-only --read-alias --show-dot --show-tilde'
-alias tmux="tmux -f ${HOME}/.config/tmux/config"
-alias irssi="irssi --home=${HOME}/.config/irssi"
-alias dosbox="dosbox -conf ${HOME}/.config/dosbox/dosbox.conf"
-alias tig="tig -n 128"
-if ${use_color}
-then
-  alias ls='ls --color=auto'
-  alias less='less -R -X'
-  alias tree='tree -C'
-  alias grep='grep --colour=auto'
-  alias egrep='egrep --colour=auto'
-  alias fgrep='fgrep --colour=auto'
-fi
-# ------------------------------------------------------------------------------
-
 # exports ----------------------------------------------------------------------
 [[ $(which ccache &> /dev/null) == 0 ]] && ( [[ $PATH =~ "/usr/lib/ccache/bin" ]] || export PATH=/usr/lib/ccache/bin:$PATH )
 [[ $PATH =~ "${HOME}/.local/bin" ]] || export PATH=$HOME/.local/bin:$PATH
@@ -149,6 +132,23 @@ export LANG='en_US.UTF-8'
 export LANGUAGE='en_US:en'
 export LOCALE='en_US.UTF-8'
 export LC_ALL=''
+# ------------------------------------------------------------------------------
+
+# aliases ----------------------------------------------------------------------
+alias which='alias | /usr/bin/which --tty-only --read-alias --show-dot --show-tilde'
+alias tmux="tmux -f ${HOME}/.config/tmux/config"
+alias irssi="irssi --home=${HOME}/.config/irssi"
+alias dosbox="dosbox -conf ${HOME}/.config/dosbox/dosbox.conf"
+alias tig="tig -n 128"
+if ${use_color}
+then
+  alias ls='ls --color=auto'
+  alias less='less -R -X'
+  alias tree='tree -C'
+  alias grep='grep --colour=auto'
+  alias egrep='egrep --colour=auto'
+  alias fgrep='fgrep --colour=auto'
+fi
 # ------------------------------------------------------------------------------
 
 # copy this into ~/.bash_local and adjust as desired ###########################
