@@ -4,6 +4,8 @@
 	email = justin@findlay.space
 	name = Justin Findlay
 	signingkey = 423725EEF5A74B6F
+[commit]
+	gpgsign = true
 [core]
 	pager = less -F -X
 [gpg]
