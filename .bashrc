@@ -122,7 +122,7 @@ export CFLAGS="-march=native -mtune=native -Os -fmessage-length=0 -pipe"
 export CXXFLAGS="$CFLAGS" # -fno-implicit-templates"
 export GPG_TTY=$(tty)  # Workaround for GPG 2.1 pinentry bug
 export GIT_SSH=$HOME/.local/bin/git-ssh
-export SCREENRC=$HOME/.local/share/pscreen/profiles/base
+export SCREENRC=$HOME/.local/share/pscreen/profiles/default
 export CCACHE_DIR=$HOME/.cache/ccache
 export F90CACHE_DIR=$HOME/.cache/f90cache
 export PKG_CONFIG_PATH=$HOME/.local/lib/pkgconfig
