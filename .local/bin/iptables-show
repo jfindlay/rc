@@ -1,6 +1,45 @@
 #!/usr/bin/env python
+from __future__ import print_function
+import sys
+from argparse import ArgumentParser, ArgumentTypeError, ArgumentDefaultsHelpFormatter
 from subprocess import call
 
-for table in ('filter', 'nat', 'mangle', 'raw', 'security'):
-    print('\n===== {} ====='.format(table))
-    call('iptables --verbose --list --table {}'.format(table).split())
+if sys.version_info[0] > 2:
+    def print_(*a, **kw) : kw['flush'] = True ; print(*a, **kw)
+elif sys.version_info[0] == 2:
+    FileNotFoundError = OSError
+    def print_(*a, **kw) : print(*a, **kw) ; (sys.stdout if kw.get('file') == sys.stdout else sys.stderr).flush()
+
+
+def get_args():
+    """
+    Get command arguments
+    """
+    all_tables = ('filter', 'nat', 'mangle', 'raw', 'security')
+    def table(ts):
+        """
+        Validate selection of table
+        """
+        if ts not in all_tables:
+            raise ArgumentTypeError('{} is not a valid table'.format(ts))
+        else:
+            return ts
+
+    ap = ArgumentParser(description='Show all or selected iptables',formatter_class=ArgumentDefaultsHelpFormatter)
+    ap.add_argument('tables', nargs='*', metavar='table', type=table, default=all_tables, help='One or more tables to show')
+    return ap.parse_args()
+
+
+def print_tables():
+    """
+    Print iptables
+    """
+    try:
+        for table in get_args().tables:
+            print_('\n===== {} ====='.format(table))
+            call('iptables --verbose --list --table {}'.format(table).split())
+    except FileNotFoundError:
+        print_('iptables command not found', file=sys.stderr)
+
+
+if __name__ == '__main__' : print_tables()
