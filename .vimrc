@@ -3,10 +3,24 @@ if v:lang =~ "utf8$" || v:lang =~ "UTF-8$"
   set fileencodings=utf-8,latin1
 endif
 
-" pathogen -------------------------------------------------
+" vundle ---------------------------------------------------
+set nocompatible
 filetype off
-call pathogen#infect()
-call pathogen#helptags()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'kien/ctrlp.vim'
+Plugin 'othree/eregex.vim'
+Plugin 'dag/vim-fish'
+Plugin 'scrooloose/nerdtree'
+Plugin 'saltstack/salt-vim'
+Plugin 'majutsushi/tagbar'
+Plugin 'tpope/vim-fugitive'
+Plugin 'gisraptor/vim-lilypond-integrator'
+
+call vundle#end()
+filetype plugin indent on
 " ----------------------------------------------------------
 
 " gvim -----------------------------------------------------
@@ -69,7 +83,7 @@ map <A-h> :wincmd h<CR>
 map <A-j> :wincmd j<CR>
 map <A-k> :wincmd k<CR>
 map <A-l> :wincmd l<CR>
-"  tabs
+" tabs
 map ,t <ESC>:tabnew<CR>
 map ,T <ESC>:tabnew<CR><F6><F7><C-w>w<C-p>
 map ,c <ESC>:tabclose<CR>
@@ -85,11 +99,6 @@ inoremap <C-l> <C-o>l
 map ,v <ESC>:tabnew<CR>:e ~/.vimrc<CR>
 map <silent> ,V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 " ----------------------------------------------------------
-
-filetype plugin indent on
-
-" lilypond
-autocmd! BufRead,BufNewFile *.ly setfiletype lilypond
 
 " settings -------------------------------------------------
 set t_vb=

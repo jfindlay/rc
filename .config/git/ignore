@@ -5,3 +5,6 @@
 *.pyc
 *.pyo
 .*.sw?
+
+# Ignore vim plugins as they are git repos handled by vundle
+.vim/bundle/
