@@ -18,6 +18,7 @@ Plugin 'saltstack/salt-vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'tpope/vim-fugitive'
 Plugin 'gisraptor/vim-lilypond-integrator'
+Plugin 'dracula/vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -26,7 +27,7 @@ filetype plugin indent on
 " gvim -----------------------------------------------------
 if &t_Co > 2 || has("gui_running")
   syntax on
-  colorscheme peachpuff
+  silent! colorscheme dracula
   set hlsearch
 endif
 if has("gui_running")
