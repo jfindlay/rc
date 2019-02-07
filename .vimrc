@@ -19,6 +19,9 @@ Plugin 'majutsushi/tagbar'
 Plugin 'tpope/vim-fugitive'
 Plugin 'gisraptor/vim-lilypond-integrator'
 Plugin 'dracula/vim'
+Plugin 'Glench/Vim-Jinja2-Syntax'
+Plugin 'PProvost/vim-ps1'
+Plugin 'rodjek/vim-puppet'
 
 call vundle#end()
 filetype plugin indent on
@@ -140,4 +143,11 @@ set softtabstop=8
 "set statusline+=%{fugitive#statusline()} " http://pastebin.com/GuU1PHzR
 set tabstop=8
 set viminfo='20,\"1024
+" ----------------------------------------------------------
+
+" local config ---------------------------------------------
+try
+  silent! source ~/.vim/vimrc.local
+catch
+endtry
 " ----------------------------------------------------------
