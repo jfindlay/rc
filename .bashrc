@@ -140,6 +140,8 @@ alias tmux="tmux -f ${HOME}/.config/tmux/config"
 alias irssi="irssi --home=${HOME}/.config/irssi"
 alias dosbox="dosbox -conf ${HOME}/.config/dosbox/dosbox.conf"
 alias tig="tig -n 128"
+alias ipy="ipython"
+alias ipy3='ipython3'
 if ${use_color}
 then
   alias ls='ls --color=auto'
