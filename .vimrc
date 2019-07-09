@@ -22,6 +22,7 @@ Plugin 'dracula/vim'
 Plugin 'Glench/Vim-Jinja2-Syntax'
 Plugin 'PProvost/vim-ps1'
 Plugin 'rodjek/vim-puppet'
+Plugin 'martinda/Jenkinsfile-vim-syntax'
 
 call vundle#end()
 filetype plugin indent on
