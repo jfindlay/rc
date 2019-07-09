@@ -2,3 +2,5 @@
 	ui = true
 [core]
 	pager = less -F -X
+[merge]
+	conflictstyle = diff3
