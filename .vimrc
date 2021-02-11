@@ -21,8 +21,8 @@ Plugin 'gisraptor/vim-lilypond-integrator'
 Plugin 'dracula/vim'
 Plugin 'Glench/Vim-Jinja2-Syntax'
 Plugin 'PProvost/vim-ps1'
-Plugin 'rodjek/vim-puppet'
-Plugin 'martinda/Jenkinsfile-vim-syntax'
+Plugin 'Konfekt/FastFold'
+Plugin 'tmhedberg/SimpylFold'
 
 call vundle#end()
 filetype plugin indent on
