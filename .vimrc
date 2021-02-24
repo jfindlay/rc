@@ -143,6 +143,7 @@ set spelllang=en_us
 set softtabstop=8
 "set statusline+=%{fugitive#statusline()} " http://pastebin.com/GuU1PHzR
 set tabstop=8
+set titlestring=%F
 set viminfo='20,\"1024
 " ----------------------------------------------------------
 
