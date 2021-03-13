@@ -134,22 +134,20 @@ export LOCALE='en_US.UTF-8'
 export LC_ALL=''
 # ------------------------------------------------------------------------------
 
-# aliases ----------------------------------------------------------------------
-alias which='alias | /usr/bin/which --tty-only --read-alias --show-dot --show-tilde'
-alias tmux="tmux -f ${HOME}/.config/tmux/config"
-alias irssi="irssi --home=${HOME}/.config/irssi"
-alias dosbox="dosbox -conf ${HOME}/.config/dosbox/dosbox.conf"
-alias tig="tig -n 128"
-alias ipy="ipython"
-alias ipy3='ipython3'
+# aliases and alias functions --------------------------------------------------
+which() { command alias | /usr/bin/which --tty-only --read-alias --show-dot --show-tilde ${@}; }
+tmux() { command tmux -f ${HOME}/.config/tmux/config ${@}; }
+irssi() { command irssi --home=${HOME}/.config/irssi ${@}; }
+dosbox() { command dosbox -conf ${HOME}/.config/dosbox/dosbox.conf ${@}; }
+tig() { command tig -n 128 ${@}; }
+ipy() { command ipython ${@}; }
+ipy3() { command ipython3 ${@}; }
 if ${use_color}
 then
   alias ls='ls --color=auto'
   alias less='less -R -X'
   alias tree='tree -C'
   alias grep='grep --colour=auto'
-  alias egrep='egrep --colour=auto'
-  alias fgrep='fgrep --colour=auto'
 fi
 # ------------------------------------------------------------------------------
 
@@ -163,4 +161,5 @@ export PS1=$(set_ps1 ${addr_color} ${dir_color} ${git_color} ${prompt_color})
 
 [[ -f ~/.bash_local ]] && source ~/.bash_local
 
+unset -f set_term test_color set_color
 unset use_color git_state addr_color dir_color git_color prompt_color
