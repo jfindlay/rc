@@ -1,77 +1,39 @@
-# set prefix key to ctrl+b
+# set prefix key
 unbind C-b
 set -g prefix C-x
 
-# reload config
-bind-key R source-file $HOME/.config/tmux/config \; display-message "source-file done"
-
-# send the prefix to client inside window (ala nested sessions)
-bind-key x send-prefix
-
-# toggle last window like screen
-bind-key C-x last-window
-
-# confirm before killing a window or the server
+# Alter keybindings
+bind-key R source-file $HOME/.config/tmux/config \; display-message "source-file done"  # Reload config
+bind-key x send-prefix  # Send the prefix to client inside window (nested session)
 bind-key k confirm kill-window
 bind-key K confirm kill-server
-
-# ctrl+left/right cycles thru windows
+bind-key C-x last-window
 bind-key -n C-right next
 bind-key -n C-left prev
 
-# scrollback buffer n lines
-set -g history-limit 4096
-
-# listen for activity on all windows
-set -g bell-action any
-
-# on-screen time for display-panes in ms
-set -g display-panes-time 1024
-
-# start window indexing at one instead of zero
 set -g base-index 1
-
-# enable wm window titles
+set -g bell-action any
+set -g clock-mode-colour magenta
+set -g clock-mode-style 24
+set -g display-panes-active-colour default
+set -g display-panes-colour default
+set -g display-panes-time 1024
+set -g history-limit 4096
+set -g message-command-style bg=default,fg=default
+set -g message-style bg=default,fg=default
+set -g mode-style bg=cyan,fg=default
+set -g pane-active-border-style bg=default,fg=green
+set -g pane-border-style bg=default,fg=default
 set -g set-titles on
-
-# wm window title string (uses statusbar variables)
 set -g set-titles-string "tmux.#I.#W"
-
-# sessions
-# put custom sessions bindings into sessions.conf and the corresponding
-# definitions into sessions.conf.d
-bind L source-file ~/.config/tmux/sessions.conf
-
-# statusbar --------------------------------------------------------------
-
-set -g display-time 2000
-
-# default statusbar colors
-set -g status-fg white
-set -g status-bg default
-set -g status-attr default
-
-# default window title colors
-set-window-option -g window-status-fg cyan
-set-window-option -g window-status-bg default
-set-window-option -g window-status-attr dim
-
-# active window title colors
-set-window-option -g window-status-current-fg white
-set-window-option -g window-status-current-bg default
-set-window-option -g window-status-current-attr bright
-
-# static or user defined window names only
-set-window-option -g allow-rename off
-
-# command/message line colors
-set -g message-fg white
-set -g message-bg black
-set -g message-attr bright
-
-# center align the window list
+set -g status-interval 1
 set -g status-justify centre
-
-# clear status bar
-set -g status-right ""
 set -g status-left ""
+set -g status-right ""
+set -g status-style bg=default,fg=cyan
+set -g window-status-activity-style bg=magenta,fg=default,bright
+set -g window-status-bell-style bg=magenta,fg=default,bright
+set -g window-status-current-format " #I:#W#F "
+set -g window-status-current-style bg=default,fg=cyan,bright
+set -g window-status-format " #I:#W#F "
+set -g window-status-separator ""
