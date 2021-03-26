@@ -4,7 +4,6 @@ if v:lang =~ "utf8$" || v:lang =~ "UTF-8$"
 endif
 
 " vundle ---------------------------------------------------
-set nocompatible
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -58,8 +57,6 @@ if has("autocmd")
 endif
 " ----------------------------------------------------------
 
-let g:loaded_matchparen=1
-
 " tab complete ---------------------------------------------
 function! InsertTabWrapper(direction)
   let col = col('.') - 1
@@ -106,6 +103,10 @@ map <silent> ,V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloa
 " ----------------------------------------------------------
 
 " settings -------------------------------------------------
+function! GetCanonicalWorkingDirectory()
+    return fnamemodify(getcwd(), ':p:~')
+endfunction
+
 set t_vb=
 set visualbell
 set t_vb=
@@ -141,9 +142,16 @@ set smartindent
 set smarttab
 set spelllang=en_us
 set softtabstop=8
-"set statusline+=%{fugitive#statusline()} " http://pastebin.com/GuU1PHzR
+
+" https://unix.stackexchange.com/a/243667
+set statusline=
+set statusline+=%{fugitive#statusline()}
+set statusline+=\ %f\ %h%w%m%r
+"set statusline+=\ %#warningmsg#%{SyntasticStatuslineFlag()}%*
+set statusline+=%=%(%l,%c%V\ \ %=\ \ %P%)
+
 set tabstop=8
-set titlestring=%F
+set titlestring=%{GetCanonicalWorkingDirectory()}
 set viminfo='20,\"1024
 " ----------------------------------------------------------
 
