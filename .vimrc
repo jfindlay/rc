@@ -77,7 +77,7 @@ map <F6> :NERDTreeToggle<CR>
 map <F7> :TagbarToggle<CR>
 map <F9> :nohl<CR>
 imap <F9> <C-O><F9>
-map ,b :Gblame<CR>
+map ,b :Git blame<CR>
 " windows
 map <A-h> :wincmd h<CR>
 map <A-j> :wincmd j<CR>
