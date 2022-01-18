@@ -151,6 +151,7 @@ set statusline+=%=%(%l,%c%V\ \ %=\ \ %P%)
 set tabstop=8
 set titlestring=%{GetCanonicalWorkingDirectory()}
 set viminfo='20,\"1024
+set wildmode=list:longest
 " ----------------------------------------------------------
 
 " local config ---------------------------------------------
