@@ -148,10 +148,12 @@ set statusline+=\ %f\ %h%w%m%r
 "set statusline+=\ %#warningmsg#%{SyntasticStatuslineFlag()}%*
 set statusline+=%=%(%l,%c%V\ \ %=\ \ %P%)
 
+set textwidth=128
 set tabstop=8
 set titlestring=%{GetCanonicalWorkingDirectory()}
 set viminfo='20,\"1024
 set wildmode=list:longest
+set wrapmargin=128
 " ----------------------------------------------------------
 
 " local config ---------------------------------------------
