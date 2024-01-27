@@ -20,6 +20,8 @@ Plugin 'gisraptor/vim-lilypond-integrator'
 Plugin 'dracula/vim'
 Plugin 'Glench/Vim-Jinja2-Syntax'
 Plugin 'PProvost/vim-ps1'
+Plugin 'vim-python/python-syntax'
+Plugin 'tpope/vim-markdown'
 
 call vundle#end()
 filetype plugin indent on
@@ -154,6 +156,10 @@ set titlestring=%{GetCanonicalWorkingDirectory()}
 set viminfo='20,\"1024
 set wildmode=list:longest
 set wrapmargin=128
+
+let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
+let g:markdown_syntax_conceal = 0
+let g:markdown_minlines = 128
 " ----------------------------------------------------------
 
 " local config ---------------------------------------------
