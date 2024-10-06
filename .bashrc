@@ -6,90 +6,33 @@
 shopt -s checkwinsize # http://cnswww.cns.cwru.edu/~chet/bash/FAQ (E11)
 shopt -s histappend # Enable history appending instead of overwriting.
 
-set_term()
-{
-  case ${TERM} in
-    xterm*|rxvt*|Eterm*|aterm|kterm|gnome*|interix)
-      PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME%%.*}:${PWD/#$HOME/~}\007"'
-      ;;
-    screen*)
-      PROMPT_COMMAND='echo -ne "\033_${USER}@${HOSTNAME%%.*}:${PWD/#$HOME/~}\033\\"'
-      ;;
-  esac
-}
-
-test_color()
-{
-  local safe_term=${TERM//[^[:alnum:]]/?}
-  local dir_colors=''
-  if [[ -f ~/.config/DIR_COLORS ]]
-  then
-    dir_colors="$(<~/.config/DIR_COLORS)"
-  elif [[ -f /etc/DIR_COLORS ]]
-  then
-    dir_colors="$(</etc/DIR_COLORS)"
-  fi
-  if [[ -z ${dir_colors} ]]
-  then
-    type -P dircolors &> /dev/null
-    dir_colors=$(dircolors --print-database)
-  fi
-  [[ ${dir_colors} == *"TERM ${safe_term}"* ]] && use_color=true
-}
-
-set_color()
-{
-  if ${use_color}
-  then
-    if ( type -P dircolors &> /dev/null )
-    then
-      if [[ -f ~/.config/DIR_COLORS ]]
-      then
-        eval $(dircolors -b ~/.config/DIR_COLORS &> /dev/null)
-      elif [[ -f /etc/DIR_COLORS ]]
-      then
-        eval $(dircolors -b /etc/DIR_COLORS)
-      fi
-    fi
-  fi
-}
-
-use_color=false
-set_term ; test_color ; set_color
-
-# git-prompt.sh cannot be used without color
-if ${use_color}
+# git prompt
+command -v git &> /dev/null ; git_state=${?}
+if [[ ${git_state} -eq 0 ]]
 then
-  command -v git &> /dev/null ; git_state=${?}
-  if [[ ${git_state} -eq 0 ]]
-  then
-    source ${HOME}/.config/git/git-prompt.sh
-    function __git_ps1__()
-    {
-      local git_prompt=$(__git_ps1 "${@}")
-      [[ -n ${git_prompt} ]] && printf '%s ' ${git_prompt}
-    }
-  fi
+  source ${HOME}/.config/git/git-prompt.sh
+  function __git_ps1__()
+  {
+    local git_prompt=$(__git_ps1 "${@}")
+    [[ -n ${git_prompt} ]] && printf '%s ' ${git_prompt}
+  }
 fi
 
 set_ps1()
 {
-  if ${use_color}
+  local esc='\[\e['
+  local cse='m\]'
+
+  printf -v root_addr_seq '%s' ${esc} '01;31' ${cse}
+  printf -v addr_seq '%s' ${esc} ${1} ${cse}
+  printf -v dir_seq '%s' ${esc} ${2} ${cse}
+  printf -v git_seq '%s' ${esc} ${3} ${cse}
+  printf -v prompt_seq '%s' ${esc} ${4} ${cse}
+  printf -v end_seq '%s0%s' ${esc} ${cse}
+
+  if [[ ${git_state} -eq 0 ]]
   then
-    local esc='\[\e['
-    local cse='m\]'
-
-    printf -v root_addr_seq '%s' ${esc} '01;31' ${cse}
-    printf -v addr_seq '%s' ${esc} ${1} ${cse}
-    printf -v dir_seq '%s' ${esc} ${2} ${cse}
-    printf -v git_seq '%s' ${esc} ${3} ${cse}
-    printf -v prompt_seq '%s' ${esc} ${4} ${cse}
-    printf -v end_seq '%s0%s' ${esc} ${cse}
-
-    if [[ ${git_state} -eq 0 ]]
-    then
-      printf -v ps1_git '$(__git_ps1__ "%s%s")' ${git_seq} '%s'
-    fi
+    printf -v ps1_git '$(__git_ps1__ "%s%s")' ${git_seq} '%s'
   fi
 
   printf -v ps1_prompt '%s\$%s' ${prompt_seq} ${end_seq} # end all colors here
@@ -142,13 +85,10 @@ dosbox() { command dosbox -conf ${HOME}/.config/dosbox/dosbox.conf ${@}; }
 tig() { command tig -n 128 ${@}; }
 ipy() { command ipython ${@}; }
 ipy3() { command ipython3 ${@}; }
-if ${use_color}
-then
-  alias ls='ls --color=auto'
-  alias less='less -R -X'
-  alias tree='tree -C'
-  alias grep='grep --colour=auto'
-fi
+alias ls='ls --color=auto'
+alias less='less -R -X'
+alias tree='tree -C'
+alias grep='grep --colour=auto'
 # ------------------------------------------------------------------------------
 
 # copy this into ~/.bash_local and adjust as desired ###########################
@@ -161,5 +101,4 @@ export PS1=$(set_ps1 ${addr_color} ${dir_color} ${git_color} ${prompt_color})
 
 [[ -f ~/.bash_local ]] && source ~/.bash_local
 
-unset -f set_term test_color set_color
-unset use_color git_state addr_color dir_color git_color prompt_color
+unset git_state addr_color dir_color git_color prompt_color
