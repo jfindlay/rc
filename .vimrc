@@ -27,6 +27,12 @@ call vundle#end()
 filetype plugin indent on
 " ----------------------------------------------------------
 
+" python docstring folding ---------------------------------
+syn region  pythonString matchgroup=pythonTripleQuotes
+  \ start=+[uU]\=\z('''\|"""\)+ end="\z1" keepend fold
+  \ contains=pythonEscape,pythonSpaceError,pythonDoctest,@Spell
+" ----------------------------------------------------------
+
 " gvim -----------------------------------------------------
 if &t_Co > 2 || has("gui_running")
   syntax on
@@ -103,6 +109,11 @@ map <silent> ,V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloa
 " ----------------------------------------------------------
 
 " settings -------------------------------------------------
+augroup fix_formatoptions
+  autocmd!
+  autocmd FileType * setlocal formatoptions=crqnj
+augroup END
+
 function! GetCanonicalWorkingDirectory()
     return fnamemodify(getcwd(), ':p:~')
 endfunction
@@ -155,11 +166,12 @@ set tabstop=8
 set titlestring=%{GetCanonicalWorkingDirectory()}
 set viminfo='20,\"1024
 set wildmode=list:longest
-set wrapmargin=128
 
 let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
 let g:markdown_syntax_conceal = 0
 let g:markdown_minlines = 128
+
+let g:python_highlight_all = 1
 " ----------------------------------------------------------
 
 " local config ---------------------------------------------
