@@ -122,6 +122,16 @@ function! GetCanonicalWorkingDirectory()
     return fnamemodify(getcwd(), ':p:~')
 endfunction
 
+" number of characters selected in visual mode, for the statusline;
+" empty outside visual mode
+function! VisualSelectionCount()
+  if mode() !~# "[vV\<C-v>]"
+    return ''
+  endif
+  let l:wc = wordcount()
+  return ' [' . get(l:wc, 'visual_chars', 0) . ' chars selected]'
+endfunction
+
 set t_vb=
 set visualbell
 set t_vb=
@@ -162,6 +172,7 @@ set softtabstop=8
 set statusline=
 set statusline+=%{fugitive#statusline()}
 set statusline+=\ %f\ %h%w%m%r
+set statusline+=%{VisualSelectionCount()}
 "set statusline+=\ %#warningmsg#%{SyntasticStatuslineFlag()}%*
 set statusline+=%=%(%l,%c%V\ \ %=\ \ %P%)
 
