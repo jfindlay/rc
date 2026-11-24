@@ -3,28 +3,32 @@ if v:lang =~ "utf8$" || v:lang =~ "UTF-8$"
   set fileencodings=utf-8,latin1
 endif
 
-" vundle ---------------------------------------------------
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+" vim-plug -----------------------------------------------
+" bootstrap vim-plug itself on first run
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'kien/ctrlp.vim'
-Plugin 'othree/eregex.vim'
-Plugin 'dag/vim-fish'
-Plugin 'scrooloose/nerdtree'
-Plugin 'saltstack/salt-vim'
-Plugin 'majutsushi/tagbar'
-Plugin 'tpope/vim-fugitive'
-Plugin 'gisraptor/vim-lilypond-integrator'
-Plugin 'dracula/vim'
-Plugin 'Glench/Vim-Jinja2-Syntax'
-Plugin 'PProvost/vim-ps1'
-Plugin 'vim-python/python-syntax'
-Plugin 'tpope/vim-markdown'
+call plug#begin('~/.vim/plugged')
 
-call vundle#end()
-filetype plugin indent on
+Plug 'kien/ctrlp.vim'
+Plug 'othree/eregex.vim'
+Plug 'dag/vim-fish'
+Plug 'scrooloose/nerdtree'
+Plug 'saltstack/salt-vim'
+Plug 'majutsushi/tagbar'
+Plug 'tpope/vim-fugitive'
+Plug 'gisraptor/vim-lilypond-integrator'
+Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'Glench/Vim-Jinja2-Syntax'
+Plug 'PProvost/vim-ps1'
+Plug 'vim-python/python-syntax'
+Plug 'tpope/vim-markdown'
+
+" also enables filetype plugin/indent and syntax
+call plug#end()
 " ----------------------------------------------------------
 
 " python docstring folding ---------------------------------
